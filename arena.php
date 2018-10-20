@@ -83,15 +83,15 @@ class arena {
 		$content = file_get_contents($url);
 
 		// match: 1위, 2위, 3위, 4, 5, ..., 999, 1,000, ...
-		preg_match_all('/<th class="num">(?:<span>|.*alt=\")((?:\d|,)+)(?:<\/span>|위\".*)<\/th>/i', $content, $match);
+		preg_match_all('/<th class="num">(?:<span>|.*alt=")((?:\d|,)+)(?:<\/span>|위".*)<\/th>/i', $content, $match);
 		$result['ranks'] = $match[1];
 
 		// match: 6등급, 5등급, ...
-		preg_match_all('/alt=\"(\d+)등급\"/i', $content, $match);
+		preg_match_all('/alt="(\d+)등급"/i', $content, $match);
 		$result['levels'] = $match[1];
 
 		// match: page query of last page link
-		preg_match_all('/href=\"\/rank\/FastStart\/FastStartRanking\?cpage=(\d+)"><img alt="마지막"/i', $content, $match);
+		preg_match_all('/href="\/rank\/FastStart\/FastStartRanking\?cpage=(\d+)"><img alt="마지막"/i', $content, $match);
 		$result['total_page'] = $match[1] ? intval($match[1][0]) : 0;
 
 		// no ranks found and didn't show the empty message
